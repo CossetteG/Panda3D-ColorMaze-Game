@@ -28,7 +28,7 @@ class ColorMaze(ShowBase):
         #disables default mouse controls
         self.disableMouse()
 
-        
+
         square = Shape("shapemodels/plane.egg", 0, Y_CON, 0, self.loader, self.render)
 
     def genLabelText(text, i):
@@ -41,7 +41,6 @@ class Shape():
         self.shape = loader.loadModel(model) 
         self.shape.setPos(x, y, z)
         self.shape.reparentTo(render)
-    print("check2")
 
 
 
