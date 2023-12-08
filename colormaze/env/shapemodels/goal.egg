@@ -1,0 +1,262 @@
+<CoordinateSystem> { Y-Up }
+
+<Comment> {
+  "maya2egg plane.mb plane.egg"
+}
+<Group> groundPlane_transform {
+}
+<Group> pPlane1 {
+  <VertexPool> pPlaneShape1.verts {
+    <Vertex> 1 {
+      -5 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 0 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 2 {
+      -4 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 0 1 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 3 {
+      -4 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 4 {
+      -5 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 1 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 5 {
+      -5 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 6 {
+      -3 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 7 {
+      -3 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 8 {
+      -4 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 9 {
+      -4 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 10 {
+      -2 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 11 {
+      -2 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 12 {
+      -3 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 13 {
+      -3 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 14 {
+      -1 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 15 {
+      -1 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 16 {
+      -2 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 17 {
+      -2 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 18 {
+      0 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 19 {
+      0 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 20 {
+      -1 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 21 {
+      -1 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 22 {
+      1 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 23 {
+      1 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 24 {
+      0 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 25 {
+      0 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 26 {
+      2 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 27 {
+      2 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 28 {
+      1 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 29 {
+      1 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 30 {
+      3 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 31 {
+      3 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 32 {
+      2 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 33 {
+      2 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 34 {
+      4 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 35 {
+      4 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 36 {
+      3 1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 37 {
+      3 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 38 {
+      5 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 39 {
+      5 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 40 {
+      4 -1 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    <Vertex> 41 {
+      4 0 0
+      <Normal> { 0 0 -1 }
+      <UV> { 1 0 }
+      <RGBA> { 1 1 1 1 }
+    }
+    
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <VertexRef>{ 3 4 2 1 <Ref> { pPlaneShape1.verts } }
+  }
+}
