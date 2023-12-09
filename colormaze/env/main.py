@@ -5,13 +5,15 @@ from direct.showbase.ShowBase import ShowBase
 from panda3d.core import TextNode, TransparencyAttrib
 from panda3d.core import LPoint3, LVector3
 from direct.task.Task import Task
+from panda3d.core import CollisionTraverser, CollisionNode
+from panda3d.core import CollisionHandlerQueue, CollisionRay
 
 import sys
 
 # constants
 Y_CON = 45     
 SPEED = 3
-#with my conf at 1000x600, the grid is like 18x12 ish
+#with my conf at 1000x600, the grid is like 20x12 ish
 #possible colors: red__ blue_ green yello white
 
 class ColorMaze(ShowBase):
@@ -46,6 +48,16 @@ class ColorMaze(ShowBase):
         self.accept("arrow_down", player.updateKeyMap, ["down", True])
         self.accept("arrow_down-up", player.updateKeyMap, ["down", False])
 
+        queue = CollisionHandlerQueue()
+        traverser = CollisionTraverser("my_traverser")
+        base.cTrav = traverser
+        # traverser.addCollider(player.collider, queue)
+        # traverser.traverse(render)
+
+        #trav.showCollisions(self.render)
+        # for entry in queue.entries:
+        #     print(entry)
+
         #sets the move() in the shape to loop and do its job (move based on keyboard input)
         self.taskMgr.add(player.move, "move")
 
@@ -64,13 +76,16 @@ class Shape():
 }
     #model is the egg file, render is passed through as a parameter but it's the game's render, 
     # and the game is 2d so we won't really use y
-    def __init__(self, model, x, z, loader, render, color, y=Y_CON):
+    def __init__(self, model, x, z, loader, render, color, y=Y_CON, collider=None):
         self.shape = loader.loadModel(model) 
         self.model = model
         self.x = x
         self.y = y
         self.z = z
         self.color = self.check_color(color)
+
+        self.collider = collider
+        # self.collider.reparentTo(self)
 
         self.shape.reparentTo(render)
         self.shape.setPos(x, y, z)
