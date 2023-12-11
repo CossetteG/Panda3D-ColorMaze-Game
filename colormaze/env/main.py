@@ -18,6 +18,8 @@ How to play:
 Known bugs:
     *it doesn't automatically set as the foreground window so you will have to click over to the game
     **the bounds objects are supposed to stop you but it just clips through
+    Does not run on codio
+    you will have to change the file path to make sure you're running colormaze/env/main.py
 '''
 
 #get congiguration
