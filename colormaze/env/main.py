@@ -1,14 +1,38 @@
+'''
+ColorMaze
+This is my final project for CS 1410
+Built with Python using Panda3D
+
+How to play:
+    run main
+    enter 1, 2, 3, or 4 in the terminal to choose the color of your player
+    *once the game loads, use the up, down, left and right keys on your keyboard to move around
+    only move through empty space or obstacles with the same color as you
+    if you run into an obstacle of not your color, you will lose
+    make your way upwards towards the goal(white)
+    **don't go out of bounds (black)
+    if you make it to the goal, you win
+    close the program after winning or losing
+
+Known bugs:
+    *it doesn't automatically set as the foreground window so you will have to click over to the game
+    **the bounds objects are supposed to stop you but it just clips through
+'''
+
+#get congiguration
 from panda3d.core import loadPrcFile 
 loadPrcFile("config/conf.prc")
 
+#import all the Panda3d that I'm using
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import TextNode, TransparencyAttrib
-from panda3d.core import Point3, LVector3
+from panda3d.core import LPoint3, LVector3
 from direct.task.Task import Task
 from panda3d.core import CollisionTraverser, CollisionPolygon, CollisionNode, CollisionBox
 from panda3d.core import CollisionHandlerEvent, CollisionRay, CollisionHandlerPusher
 from panda3d.core import NodePath
 from direct.showbase.DirectObject import DirectObject
+from direct.gui.OnscreenText import OnscreenText
 import sys
 
 # constants
@@ -18,20 +42,22 @@ SPEED = 3
 #possible colors: red__ blue_ green yello white
 
 class ColorMaze(ShowBase):
-    
     def __init__(self):
+        #getting a color for the player
+        code = getcolorcode()
+
         # Initialize the ShowBase class from which we inherit, which will
         # create a window and set up everything we need for rendering into it.
         super().__init__()
+
         #disables default mouse controls
         self.disableMouse()
-        #creating events
-        event = CollisionHandlerEvent()
-        events = Events(event, self)
-        pusher = CollisionHandlerPusher()
 
-        #creates a shape objects and renders them to this game
-        player = Shape("shapemodels/whitesquare.egg", 0, 0, self.loader, self.render, "white", "player")
+        #actually creating the player
+        self.playermodel = "shapemodels/" + code + "square.egg"
+        player = Shape(self.playermodel, 0, 0, self.loader, self.render, code, "player")
+        
+        #creates other shape objects and renders them to this game        
         red_obs = Shape("shapemodels/red__rect.egg", 12, 3, self.loader, self.render, "red__", "obs")
         blue_obs = Shape("shapemodels/blue_rect.egg", -12, 3, self.loader, self.render, "blue_", "obs")
         green_obs = Shape("shapemodels/greenrect.egg", 4, 3, self.loader, self.render, "green", "obs")
@@ -53,6 +79,14 @@ class ColorMaze(ShowBase):
         self.accept("arrow_down", player.updateKeyMap, ["down", True])
         self.accept("arrow_down-up", player.updateKeyMap, ["down", False])
         
+        #creates a text object to be updated later
+        text = OnscreenText(text = " ", pos = (0, -.5), scale = .3)
+
+        #creating events
+        event = CollisionHandlerEvent()
+        events = Events(event, player, text)
+        pusher = CollisionHandlerPusher()
+
         #adds normal Collision events to everything that touches the player
         event.addInPattern('player-into-obs')
         base.cTrav = CollisionTraverser("player-into-obs")
@@ -68,25 +102,36 @@ class ColorMaze(ShowBase):
 
         #tells the game to accept the event and run the handler
         self.accept("player-into-obs", events.handleRailCollision)
-        
 
         #sets the move() in the shape to loop and do its job (move based on keyboard input)
         self.taskMgr.add(player.move, "move")
 
-        #copied. idk yet but its not breaking anything
-        # def genLabelText(text, i):
-        #     return OnscreenText(text=text, parent=self.background, pos=(0.07, -.06 * i - 0.1),
-        #                     fg=(1, 1, 1, 1), align=TextNode.ALeft, shadow=(0, 0, 0, 0.5), scale=.05)
+        
 
 #the event handler object
 class Events(DirectObject):
-    def __init__(self, event, game):
+    def __init__(self, event, player, text):
         self.accept(event.addInPattern('%fn-into-%in'), self.handleRailCollision)
-        game.accept(event.addInPattern('%fn-into-%in'), self.handleRailCollision)
+        self.player = player
+        self.text = text
 
+    #the player object and the text objects are passed in so they can be updated
+    #chooses between printing brownie points, updating the text to you win or you lose,
+    #freezes the shape
     def handleRailCollision(self, entry):
-        print(entry.getFromNodePath())
-        print(entry.getIntoNodePath())
+        obs_colors = ["green", "red__", "blue_", "yello"]
+        into = str(entry.getIntoNodePath())[7:12]
+        fromm = str(entry.getFromNodePath())[7:12]
+        if fromm == into:
+            print("brownie points!")
+        elif into in obs_colors:
+            self.text.text = "You Lose :("
+            self.player.freeze()
+        elif into == "goal_":
+            self.text.text = ("You Win!")
+            self.player.freeze()
+        else:
+            pass
         
 
 class Shape():
@@ -97,13 +142,20 @@ class Shape():
         "right": False
 }
 #box = CollisionBox(Point3(minx, miny, minz), Point3(maxx, maxy, maxz))
+#"player": [Point3(-1, 0, -1), Point3(1, 0, 1)]
+# "obs": [Point3(-2, 0, -1), Point3(2, 0, 1)],
+# "bg": [Point3(-1, 5, -1), Point3(1, 5, 1)],
+# "goal": [Point3(-20, 0, -.75), Point3(20, 0, .75)],
+# "h_edge": [Point3(-.5, 0, -12), Point3(.5, 0, 12)],
+# "v_edge": [Point3(-20, 0, -.5), Point3(20, 0, .5)]
+#^this mess will tell you how much I struggled to get all the collider peices to work haha
     ColliderMap = {
-        "player": [Point3(-1, 0, -1), Point3(1, 0, 1)],
-        "obs": [Point3(-1, 0, -1), Point3(1, 0, 1)],
-        "bg": [Point3(-1, 0, -1), Point3(1, 0, 1)],
-        "goal": [Point3(-1, 0, -1), Point3(1, 0, 1)],
-        "h_edge": [Point3(-1, 0, -1), Point3(1, 0, 1)],
-        "v_edge": [Point3(-1, 0, -1), Point3(1, 0, 1)]
+        "player": [1, 1, 1],
+        "obs": [3, 1, 1],
+        "bg": [.5, .5, .5],
+        "goal": [20, 1, .75],
+        "h_edge": [.5, 2, 12],
+        "v_edge": [20, 2, .5]
 }
     
     #model is the egg file, render is passed through as a parameter but it's the game's render, 
@@ -115,10 +167,11 @@ class Shape():
         self.y = y
         self.z = z
         self.color = self.check_color(color, self.model[12:17])
-        self.freeze = freeze
+        self.character = character
+        self._freeze = freeze
 
-        # print(self.ColliderMap[character][0])
-        self.collider = CollisionBox(Point3(-1, -1, -1), Point3(1, 1, 1))
+        dimn = self.ColliderMap[character]
+        self.collider = CollisionBox(LPoint3(0, 0, 0), dimn[0], dimn[1], dimn[2])
         self.cnodePath = CollisionNode('cnode')
         self.cnodePath.addSolid(self.collider)
         self.Col = self.shape.attachNewNode(self.cnodePath)
@@ -126,7 +179,7 @@ class Shape():
         # self.cnodePath.node().setFromCollideMask(self.shape.getDefaultCollideMask())
         # self.cnodePath.setCollideMask(self.cnodePath.getCollideMask())
         self.Col.reparentTo(self.shape)
-        self.Col.show()
+        # self.Col.show()
 
         self.shape.reparentTo(render)
         self.shape.setPos(x, y, z)
@@ -156,10 +209,12 @@ class Shape():
             print("Color Path and Color code do not match")
             print(path, color)
 
+    def freeze(self):
+        self._freeze = True
 
     #the function that is looped every frame to move the shape
     def move(self, task):
-        if self.freeze == False:
+        if self._freeze == False:
             #get the current values for position and time
             dt = globalClock.getDt()
             new_x = self.get_x()
@@ -186,7 +241,22 @@ class Shape():
     def updateKeyMap(self, key, state):
         self.KeyMap[key] = state
 
+#will ask the player which color they want to play
+def getcolorcode():
+    while True:
+        num = input("Choose a color: 1 for red, 2 for blue, 3 for green, 4 for yellow: ")
+        if num == '1':
+            return "red__"
+        elif num == '2':
+            return "blue_"
+        elif num == '3':
+            return "green"
+        elif num == '4':
+            return "yello"
+        else:
+            pass
 
+#LETS GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 def main():
     colormaze = ColorMaze()
     colormaze.run()
