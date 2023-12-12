@@ -4,7 +4,9 @@ This is my final project for CS 1410
 Built with Python using Panda3D
 
 How to play:
+    Set up Python env 
     pip install Panda3d
+    upload config into config, shapemodels, and main
     run main
     enter 1, 2, 3, or 4 in the terminal to choose the color of your player
     *once the game loads, use the up, down, left and right keys on your keyboard to move around
